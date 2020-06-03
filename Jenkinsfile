@@ -20,8 +20,16 @@ pipeline {
                     steps { sh "./gradlew compileJava" }
                 }
                 stage("Run tests") {
-                    steps { sh "./gradlew test -x check -x asciidoctor" }
+                    steps { sh './gradlew test --no-daemon' }
                 }
+                stage("Build"){
+                   steps{ sh './gradlew build -x test --no-daemon' }
+                }
+                stage("Checkstyle"){
+                    steps{ sh './gradlew checkstyleMain --no-daemon' //run a gradle task
+                        }
+                }
+
             }
 
         }
