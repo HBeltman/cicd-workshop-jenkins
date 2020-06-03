@@ -25,6 +25,11 @@ pipeline {
 
                 stage("Run tests") {
                     steps { sh './gradlew test --no-daemon' }
+                    post {
+                        always {
+                            junit 'build/test-results/**/*.xml'
+                        }
+                    }
                 }
 
                 stage("Build"){
