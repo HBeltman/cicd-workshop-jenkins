@@ -21,11 +21,6 @@ pipeline {
                 }
                 stage("Run tests") {
                     steps { sh "./gradlew test -x check -x asciidoctor" }
-                    post {
-                        always {
-                            junit 'build/test-results/**/*.xml'
-                        }
-                    }
                 }
             }
 
